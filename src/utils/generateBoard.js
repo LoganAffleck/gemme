@@ -7,13 +7,10 @@ class Gem {
     }
 }
 
-//set the max for X and Y (board is always square)
-let max = 7;
-
 //Generate a starting board: 
 let board = [];
 
-const fillBoard = (max) => {
+const fillBoard = (max = 7) => {
     
     //set the starting X and Y Coordinates
     let x = 0;
@@ -28,11 +25,13 @@ const fillBoard = (max) => {
         
         const newColor = (colorAvoid = null) => {
             let validColors = gemColors;
+            let ranSeed = 7;
             //if there's a color to avoid, remove it from the array of options... 
             if(colorAvoid){
                 validColors = validColors.filter((color) => color != colorAvoid)
+                ranSeed -= 1;
             }
-            return validColors[Math.floor(Math.random() * 7)]
+            return validColors[Math.floor(Math.random() * ranSeed)]
         }
 
         //generate a random gem color.
@@ -116,7 +115,6 @@ const fillBoard = (max) => {
 
         }
 
-        //create GEM:
         board.push(new Gem(gemColor, x, y, up, right, down, left))
 
         //If Y is less than the MAX, continue increasing Y.
@@ -132,6 +130,4 @@ const fillBoard = (max) => {
     return board;
 }
 
-fillBoard(7)
-
-//export default fillBoard;
+export default fillBoard;
